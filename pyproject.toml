@@ -2,7 +2,7 @@
 name = "bibli"
 version = "0.1.0"
 description = ""
-authors = ["Corentin Dancette <corentin.dancette@raidium.fr>"]
+authors = ["Corentin Dancette <corentin.dancette@gmail.com>"]
 readme = "README.md"
 package-mode = false
 [tool.poetry.dependencies]
