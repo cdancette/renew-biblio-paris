@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+</head>
+<body>
+    <h1>Current Books and Their Status</h1>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.Title }} - Status: {{ book.State }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
