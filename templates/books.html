@@ -1,14 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .status {
+            font-weight: bold;
+        }
+        .status.Arendrebientôt {
+            color: #E65100; /* Orange for soon to be returned */
+        }
+        .status.Enretard {
+            color: #B71C1C; /* Red for late */
+        }
+        .status.Disponible {
+            color: #1B5E20; /* Green for available */
+        }
+    </style>
 </head>
 <body>
     <h1>Current Books and Their Status</h1>
-    <ul>
-        {% for book in books %}
-            <li>{{ book.Title }} - Status: {{ book.State }}</li>
-        {% endfor %}
-    </ul>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.Title }}</td>
+                    <td class="status {{ book.State.replace(' ', '') }}">{{ book.State }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
