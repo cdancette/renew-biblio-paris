@@ -33,17 +33,23 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-        .status {
+        .late, .soon-late, .cannot-renew {
             font-weight: bold;
         }
-        .status.Arendrebientôt {
-            color: #E65100; /* Orange for soon to be returned */
-        }
-        .status.Enretard {
+        .late {
             color: #B71C1C; /* Red for late */
         }
-        .status.Disponible {
-            color: #1B5E20; /* Green for available */
+        .soon-late {
+            color: #FFA726; /* Orange for soon to be late */
+        }
+        .can-renew {
+            color: #2E7D32; /* Green for can renew */
+        }
+        .cannot-renew {
+            color: #C62828; /* Red for cannot renew */
+        }
+        .status-column {
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -55,13 +61,23 @@
                 <tr>
                     <th>Title</th>
                     <th>Status</th>
+                    <th>Date to Return</th>
+                    <th>Is Late</th>
+                    <th>Can Renew</th>
+                    <th>Is Soon Late</th>
+                    <th>Cannot Renew Reason</th>
                 </tr>
             </thead>
             <tbody>
                 {% for book in books %}
                 <tr>
                     <td>{{ book.Title }}</td>
-                    <td class="status {{ book.State.replace(' ', '') }}">{{ book.State }}</td>
+                    <td class="status-column">{{ book.State }}</td>
+                    <td>{{ book.WhenBack.strftime('%d %b %Y')}}</td>
+                    <td class="{{ 'late' if book.IsLate else '' }}">{{ 'Yes' if book.IsLate else 'No' }}</td>
+                    <td class="{{ 'can-renew' if book.CanRenew else 'cannot-renew' }}">{{ 'Yes' if book.CanRenew else 'No' }}</td>
+                    <td class="{{ 'soon-late' if book.IsSoonLate else '' }}">{{ 'Yes' if book.IsSoonLate else 'No' }}</td>
+                    <td>{{ book.CannotRenewReason }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
